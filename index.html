@@ -1,722 +1,531 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐶 狗狗乐园 · 可爱狗狗大集合</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    overflow-x: hidden;
+  }
+
+  /* 飘落的爪印装饰 */
+  .paw {
+    position: fixed;
+    font-size: 24px;
+    opacity: 0.15;
+    animation: floatDown linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes floatDown {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    color: #92400e;
+    text-shadow: 3px 3px 0 #fbbf24, 6px 6px 0 rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+    animation: bounceIn 0.8s ease;
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .subtitle {
+    color: #b45309;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .dog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dog-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 24px 16px 20px;
+    box-shadow: 0 10px 30px rgba(180, 83, 9, 0.15);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dog-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .dog-card:hover::before { opacity: 1; }
+
+  .dog-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 45px rgba(180, 83, 9, 0.3);
+  }
+
+  .dog-card:active {
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  .dog-avatar {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 16px;
+    transition: transform 0.4s;
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.12));
+  }
+
+  .dog-card:hover .dog-avatar {
+    transform: rotate(-6deg) scale(1.08);
+    animation: tailWag 0.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes tailWag {
+    from { transform: rotate(-8deg) scale(1.08); }
+    to { transform: rotate(6deg) scale(1.08); }
+  }
+
+  .dog-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #78350f;
+    margin-bottom: 6px;
+  }
+
+  .dog-tag {
+    display: inline-block;
+    background: #fef3c7;
+    color: #b45309;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .dog-desc {
+    font-size: 14px;
+    color: #92400e;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  /* 汪汪气泡 */
+  .bubble {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #fbbf24;
+    color: #78350f;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 16px 16px 16px 4px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dog-card:hover .bubble {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* 点击彩蛋 */
+  .dog-card.clicked .dog-avatar {
+    animation: jump 0.6s ease;
+  }
+
+  @keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-30px) rotate(-10deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+    70% { transform: translateY(-15px) rotate(-5deg); }
+  }
+
+  /* 爱心飘出 */
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none;
+    animation: heartFloat 1.2s ease-out forwards;
+    z-index: 10;
+  }
+
+  @keyframes heartFloat {
+    0% { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--tx), -120px) scale(1.6); }
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #92400e;
+    font-size: 15px;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 狗叫计数器 */
+  .bark-counter {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #78350f;
+    color: #fef3c7;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(120, 53, 15, 0.4);
+    z-index: 100;
+    transition: transform 0.2s;
+  }
+
+  .bark-counter.pop {
+    transform: scale(1.15);
+  }
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+<header>
+  <h1>🐾 狗狗乐园 🐾</h1>
+  <p class="subtitle">这里住着一群最可爱的毛孩子</p>
+</header>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="dog-grid" id="dogGrid"></div>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="bark-counter" id="counter">🐶 已汪 0 次</div>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+<footer>
+  <p>❤️ 每一只狗狗都值得被爱 ❤️</p>
+</footer>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<script>
+/* ============================================================
+   一、狗狗数据（想加狗，往这里加就行）
+   ============================================================ */
+const dogs = [
+  {
+    name: '大黄',
+    tag: '中华田园犬',
+    desc: '村里的扛把子，看家护院一把手，见到熟人尾巴摇成螺旋桨。',
+    bark: '汪汪！',
+    body: '#f59e0b',
+    belly: '#fcd34d',
+    nose: '#78350f',
+    ear: '#d97706',
+    spot: null,
+    size: 'big'
+  },
+  {
+    name: '大黑',
+    tag: '黑背',
+    desc: '一身黑亮毛发，眼神犀利，其实内心是个黏人精，怕打雷。',
+    body: '#374151',
+    belly: '#6b7280',
+    nose: '#111827',
+    ear: '#1f2937',
+    spot: null,
+    size: 'big'
+  },
+  {
+    name: '小白',
+    tag: '萨摩耶',
+    desc: '微笑天使，掉毛如雪，见谁都亲，是个没有原则的狗子。',
+    body: '#f9fafb',
+    belly: '#ffffff',
+    nose: '#1f2937',
+    ear: '#e5e7eb',
+    spot: null,
+    size: 'big'
+  },
+  {
+    name: '豆豆',
+    tag: '柯基',
+    desc: '小短腿大屁股，走路一扭一扭，跑起来像个小面包。',
+    body: '#d97706',
+    belly: '#fef3c7',
+    nose: '#78350f',
+    ear: '#b45309',
+    spot: '#fbbf24',
+    size: 'small'
+  },
+  {
+    name: '奶糖',
+    tag: '比熊',
+    desc: '一团会走路的棉花糖，最爱撒娇，抱起来就睡着。',
+    body: '#fef3c7',
+    belly: '#ffffff',
+    nose: '#78350f',
+    ear: '#fde68a',
+    spot: null,
+    size: 'small'
+  },
+  {
+    name: '将军',
+    tag: '哈士奇',
+    desc: '拆家冠军，表情包担当，智商时高时低，全凭心情。',
+    body: '#9ca3af',
+    belly: '#f3f4f6',
+    nose: '#1f2937',
+    ear: '#6b7280',
+    spot: '#ffffff',
+    size: 'big'
+  }
+];
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+/* ============================================================
+   二、生成一只狗的 SVG（纯代码画，不依赖任何图片）
+   ============================================================ */
+function createDogSVG(dog) {
+  const isSmall = dog.size === 'small';
+  // 小体型狗：耳朵更圆、脸更扁、比例更萌
+  const headR = isSmall ? 34 : 36;
+  const earY = isSmall ? 22 : 18;
+  const earRX = isSmall ? 14 : 12;
+  const earRY = isSmall ? 18 : 22;
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+  return `
+    <svg class="dog-avatar" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <!-- 身体 -->
+      <ellipse cx="70" cy="108" rx="${isSmall ? 38 : 42}" ry="${isSmall ? 22 : 24}"
+               fill="${dog.body}" />
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+      <!-- 肚皮 -->
+      <ellipse cx="70" cy="112" rx="${isSmall ? 22 : 24}" ry="${isSmall ? 14 : 16}"
+               fill="${dog.belly}" />
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+      <!-- 尾巴 -->
+      <path d="M ${isSmall ? 32 : 28} 100 Q 12 88, 18 70"
+            stroke="${dog.body}" stroke-width="9" fill="none" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate"
+          values="-8 28 100; 8 28 100; -8 28 100" dur="0.6s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 左耳 -->
+      <ellipse cx="${70 - (isSmall ? 30 : 32)}" cy="${earY + 24}"
+               rx="${earRX}" ry="${earRY}" fill="${dog.ear}"
+               transform="rotate(-25 ${70 - (isSmall ? 30 : 32)} ${earY + 24})" />
+
+      <!-- 右耳 -->
+      <ellipse cx="${70 + (isSmall ? 30 : 32)}" cy="${earY + 24}"
+               rx="${earRX}" ry="${earRY}" fill="${dog.ear}"
+               transform="rotate(25 ${70 + (isSmall ? 30 : 32)} ${earY + 24})" />
+
+      <!-- 头 -->
+      <circle cx="70" cy="${earY + 30}" r="${headR}" fill="${dog.body}" />
+
+      <!-- 头顶斑纹（如果有） -->
+      ${dog.spot ? `
+        <ellipse cx="70" cy="${earY + 12}" rx="${isSmall ? 10 : 12}" ry="${isSmall ? 7 : 8}"
+                 fill="${dog.spot}" opacity="0.85" />
+      ` : ''}
+
+      <!-- 脸部白色区域 -->
+      <ellipse cx="70" cy="${earY + 42}" rx="${isSmall ? 24 : 26}" ry="${isSmall ? 20 : 22}"
+               fill="${dog.belly}" opacity="0.9" />
+
+      <!-- 眼睛 -->
+      <circle cx="${70 - 13}" cy="${earY + 30}" r="4.5" fill="#1f2937" />
+      <circle cx="${70 + 13}" cy="${earY + 30}" r="4.5" fill="#1f2937" />
+      <!-- 眼神光 -->
+      <circle cx="${70 - 11.5}" cy="${earY + 28.5}" r="1.5" fill="#fff" />
+      <circle cx="${70 + 14.5}" cy="${earY + 28.5}" r="1.5" fill="#fff" />
+
+      <!-- 鼻子 -->
+      <ellipse cx="70" cy="${earY + 42}" rx="7" ry="5.5" fill="${dog.nose}" />
+      <!-- 鼻子高光 -->
+      <ellipse cx="68" cy="${earY + 40.5}" rx="2" ry="1.2" fill="#fff" opacity="0.5" />
+
+      <!-- 嘴巴 -->
+      <path d="M 70 ${earY + 47} Q 63 ${earY + 53}, 58 ${earY + 48}"
+            stroke="${dog.nose}" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M 70 ${earY + 47} Q 77 ${earY + 53}, 82 ${earY + 48}"
+            stroke="${dog.nose}" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+      <!-- 舌头（小体型狗更爱吐舌头） -->
+      ${isSmall ? `
+        <path d="M 67 ${earY + 52} Q 70 ${earY + 60}, 73 ${earY + 52}"
+              fill="#f87171" stroke="#ef4444" stroke-width="0.8" />
+      ` : ''}
+
+      <!-- 腮红 -->
+      <circle cx="${70 - 22}" cy="${earY + 44}" r="6" fill="#fca5a5" opacity="0.4" />
+      <circle cx="${70 + 22}" cy="${earY + 44}" r="6" fill="#fca5a5" opacity="0.4" />
+
+      <!-- 前爪 -->
+      <ellipse cx="${70 - 18}" cy="128" rx="9" ry="6" fill="${dog.belly}" />
+      <ellipse cx="${70 + 18}" cy="128" rx="9" ry="6" fill="${dog.belly}" />
+    </svg>
+  `;
+}
+
+/* ============================================================
+   三、把狗狗渲染到页面上
+   ============================================================ */
+const grid = document.getElementById('dogGrid');
+
+dogs.forEach((dog, index) => {
+  const card = document.createElement('div');
+  card.className = 'dog-card';
+  card.style.animation = `bounceIn 0.6s ease ${index * 0.08}s both`;
+  card.innerHTML = `
+    <div class="bubble">${dog.bark}</div>
+    ${createDogSVG(dog)}
+    <div class="dog-name">${dog.name}</div>
+    <div class="dog-tag">${dog.tag}</div>
+    <div class="dog-desc">${dog.desc}</div>
+  `;
+
+  // 点击：跳跃 + 飘爱心 + 计数器
+  card.addEventListener('click', (e) => {
+    card.classList.remove('clicked');
+    void card.offsetWidth; // 触发重排，让动画能重复播放
+    card.classList.add('clicked');
+
+    spawnHearts(e.currentTarget);
+    bark();
+  });
+
+  grid.appendChild(card);
+});
+
+/* ============================================================
+   四、点击时飘出爱心
+   ============================================================ */
+function spawnHearts(card) {
+  const emojis = ['❤️', '💛', '🧡', '💕', '🐾'];
+  for (let i = 0; i < 5; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    heart.style.left = (30 + Math.random() * 80) + 'px';
+    heart.style.top = (40 + Math.random() * 40) + 'px';
+    heart.style.setProperty('--tx', (Math.random() * 80 - 40) + 'px');
+    heart.style.animationDelay = (i * 0.08) + 's';
+    card.appendChild(heart);
+    setTimeout(() => heart.remove(), 1400);
+  }
+}
+
+/* ============================================================
+   五、狗叫计数器
+   ============================================================ */
+let barkCount = 0;
+const counter = document.getElementById('counter');
+
+function bark() {
+  barkCount++;
+  counter.textContent = `🐶 已汪 ${barkCount} 次`;
+  counter.classList.add('pop');
+  setTimeout(() => counter.classList.remove('pop'), 200);
+}
+
+/* ============================================================
+   六、背景飘落爪印
+   ============================================================ */
+const pawEmojis = ['🐾', '🦴', '🐕', '🐶'];
+for (let i = 0; i < 15; i++) {
+  const paw = document.createElement('div');
+  paw.className = 'paw';
+  paw.textContent = pawEmojis[Math.floor(Math.random() * pawEmojis.length)];
+  paw.style.left = Math.random() * 100 + 'vw';
+  paw.style.fontSize = (16 + Math.random() * 24) + 'px';
+  paw.style.animationDuration = (12 + Math.random() * 15) + 's';
+  paw.style.animationDelay = (Math.random() * 10) + 's';
+  document.body.appendChild(paw);
+}
+
+/* ============================================================
+   七、彩蛋：连着点同一只狗 5 次，它会说话
+   ============================================================ */
+const clickMap = new Map();
+const secrets = [
+  '再摸一下嘛～',
+  '你身上有肉味！',
+  '汪！我在呢！',
+  '带我出去玩好不好？',
+  '我最喜欢你啦！❤️'
+];
+
+document.querySelectorAll('.dog-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('.dog-name').textContent;
+    const count = (clickMap.get(name) || 0) + 1;
+    clickMap.set(name, count);
+
+    if (count % 5 === 0) {
+      const msg = secrets[Math.floor(Math.random() * secrets.length)];
+      showToast(`${name}：${msg}`);
+    }
+  });
+});
+
+function showToast(text) {
+  const toast = document.createElement('div');
+  toast.textContent = text;
+  toast.style.cssText = `
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: #78350f;
+    color: #fef3c7;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(120,53,15,0.4);
+    z-index: 999;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  `;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  });
+  setTimeout(() => {
+    toast.style.transform = 'translateX(-50%) translateY(-80px)';
+    setTimeout(() => toast.remove(), 400);
+  }, 2000);
+}
+</script>
+
 </body>
-
 </html>
